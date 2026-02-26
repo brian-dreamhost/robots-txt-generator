@@ -54,7 +54,7 @@ export function LivePreview({ content }) {
           </button>
         </div>
       </div>
-      <div className="p-4 overflow-auto max-h-96">
+      <div className="p-4 overflow-auto max-h-96" tabIndex={0} role="region" aria-label="robots.txt preview">
         {content ? (
           <pre className="text-sm font-mono text-cloudy whitespace-pre leading-relaxed">
             {content.split('\n').map((line, i) => (

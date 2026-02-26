@@ -18,6 +18,9 @@ export function RuleRow({ rule, onChange, onRemove, canRemove }) {
       <div className="relative flex-1 group">
         <input
           type="text"
+          name="path"
+          autoComplete="off"
+          spellCheck={false}
           value={rule.path}
           onChange={(e) => onChange({ ...rule, path: e.target.value })}
           placeholder={rule.type === 'Disallow' ? '/ (blocks all)' : '/allowed-path/'}

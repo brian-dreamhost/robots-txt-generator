@@ -68,6 +68,7 @@ export function AgentGroup({ group, onChange, onRemove, canRemove }) {
             <label className="text-sm font-medium text-cloudy whitespace-nowrap">User-agent:</label>
             {!isCustomAgent ? (
               <select
+                name="user-agent"
                 value={group.agent}
                 onChange={(e) => handleAgentChange(e.target.value)}
                 className="flex-1 min-w-40 px-3 py-2 bg-midnight border border-metal/30 rounded-lg text-sm text-white focus:outline-none focus:border-azure focus:ring-1 focus:ring-azure"
@@ -81,11 +82,13 @@ export function AgentGroup({ group, onChange, onRemove, canRemove }) {
               <div className="flex-1 flex gap-2">
                 <input
                   type="text"
+                  name="custom-agent"
+                  autoComplete="off"
+                  spellCheck={false}
                   value={group.agent}
                   onChange={(e) => onChange({ ...group, agent: e.target.value })}
                   placeholder="Custom bot name"
                   className="flex-1 px-3 py-2 bg-midnight border border-metal/30 rounded-lg text-sm text-white placeholder-galactic focus:outline-none focus:border-azure focus:ring-1 focus:ring-azure font-mono"
-                  autoFocus
                 />
                 <button
                   onClick={() => { setIsCustomAgent(false); onChange({ ...group, agent: '*' }); }}
@@ -111,22 +114,23 @@ export function AgentGroup({ group, onChange, onRemove, canRemove }) {
 
           <button
             onClick={addRule}
-            className="flex items-center gap-1.5 text-sm text-azure hover:text-white transition-colors focus:outline-none focus:underline"
+            className="flex items-center gap-1.5 text-sm text-azure hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-azure focus:ring-offset-2 focus:ring-offset-abyss rounded"
           >
-            <PlusIcon className="w-4 h-4" />
+            <PlusIcon className="w-4 h-4" aria-hidden="true" />
             Add rule
           </button>
 
           <div className="flex items-center gap-2">
-            <label className="text-sm text-galactic whitespace-nowrap">Crawl-delay (optional):</label>
+            <label htmlFor={`crawl-delay-${group.id}`} className="text-sm text-galactic whitespace-nowrap">Crawl-delay (optional):</label>
             <input
+              id={`crawl-delay-${group.id}`}
               type="number"
+              name="crawl-delay"
               min="0"
               value={group.crawlDelay}
               onChange={(e) => onChange({ ...group, crawlDelay: e.target.value })}
               placeholder="e.g. 10"
               className="w-24 px-3 py-1.5 bg-midnight border border-metal/30 rounded-lg text-sm text-white placeholder-galactic focus:outline-none focus:border-azure focus:ring-1 focus:ring-azure"
-              aria-label="Crawl delay in seconds"
             />
             <span className="text-xs text-galactic">seconds</span>
           </div>

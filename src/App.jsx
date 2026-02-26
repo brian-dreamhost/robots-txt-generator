@@ -54,7 +54,7 @@ function App() {
             <span className="w-1.5 h-1.5 rounded-full bg-turtle" />
             Free SEO Tool
           </div>
-          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4">
+          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4 text-pretty">
             Robots.txt Generator
           </h1>
           <p className="text-lg text-cloudy max-w-2xl">

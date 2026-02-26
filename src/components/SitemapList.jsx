@@ -21,6 +21,9 @@ export function SitemapList({ sitemaps, onChange }) {
           <div key={index} className="flex items-center gap-2">
             <input
               type="url"
+              name={`sitemap-${index}`}
+              autoComplete="url"
+              spellCheck={false}
               value={sitemap}
               onChange={(e) => updateSitemap(index, e.target.value)}
               placeholder="https://example.com/sitemap.xml"
@@ -40,9 +43,9 @@ export function SitemapList({ sitemaps, onChange }) {
       </div>
       <button
         onClick={addSitemap}
-        className="flex items-center gap-1.5 text-sm text-azure hover:text-white transition-colors focus:outline-none focus:underline"
+        className="flex items-center gap-1.5 text-sm text-azure hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-azure focus:ring-offset-2 focus:ring-offset-abyss rounded"
       >
-        <PlusIcon className="w-4 h-4" />
+        <PlusIcon className="w-4 h-4" aria-hidden="true" />
         Add sitemap URL
       </button>
     </div>
