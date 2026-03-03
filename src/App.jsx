@@ -14,6 +14,66 @@ function App() {
   const [sitemaps, setSitemaps] = useState(['']);
   const [host, setHost] = useState('');
 
+  const fillTestData = () => {
+    const now = Date.now();
+    nextId = 100;
+    setGroups([
+      {
+        id: 1,
+        agent: '*',
+        rules: [
+          { id: now, type: 'Allow', path: '/' },
+          { id: now + 1, type: 'Disallow', path: '/admin/' },
+          { id: now + 2, type: 'Disallow', path: '/wp-login.php' },
+          { id: now + 3, type: 'Disallow', path: '/cgi-bin/' },
+          { id: now + 4, type: 'Disallow', path: '/wp-includes/' },
+          { id: now + 5, type: 'Disallow', path: '/*?s=' },
+          { id: now + 6, type: 'Disallow', path: '/*?ref=' },
+        ],
+        crawlDelay: '',
+      },
+      {
+        id: 2,
+        agent: 'GPTBot',
+        rules: [
+          { id: now + 7, type: 'Disallow', path: '/' },
+        ],
+        crawlDelay: '',
+      },
+      {
+        id: 3,
+        agent: 'ClaudeBot',
+        rules: [
+          { id: now + 8, type: 'Disallow', path: '/' },
+        ],
+        crawlDelay: '',
+      },
+      {
+        id: 4,
+        agent: 'Googlebot-Image',
+        rules: [
+          { id: now + 9, type: 'Allow', path: '/images/' },
+          { id: now + 10, type: 'Disallow', path: '/private-images/' },
+        ],
+        crawlDelay: '',
+      },
+      {
+        id: 5,
+        agent: 'Bingbot',
+        rules: [
+          { id: now + 11, type: 'Allow', path: '/' },
+          { id: now + 12, type: 'Disallow', path: '/admin/' },
+        ],
+        crawlDelay: '10',
+      },
+    ]);
+    setSitemaps([
+      'https://www.dreamhost.com/sitemap.xml',
+      'https://www.dreamhost.com/blog/sitemap.xml',
+    ]);
+    setHost('www.dreamhost.com');
+  };
+
   const robotsTxt = useMemo(
     () => generateRobotsTxt(groups, sitemaps, host),
     [groups, sitemaps, host]
@@ -37,7 +97,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-abyss text-white bg-glow bg-grid">
-      <div className="max-w-6xl mx-auto px-4 py-12 relative z-10 animate-fadeIn">
+      <div className="max-w-[1600px] mx-auto px-4 py-12 relative z-10 animate-fadeIn">
 
         {/* Breadcrumb */}
         <nav className="mb-8 text-sm text-galactic">
@@ -68,6 +128,13 @@ function App() {
           <div className="text-sm text-cloudy">
             <strong className="text-white">How it works:</strong> Add user-agent groups to specify rules for different bots. An empty <code className="text-turtle font-mono bg-midnight/50 px-1 rounded">Disallow:</code> path means &ldquo;allow all.&rdquo; A <code className="text-coral font-mono bg-midnight/50 px-1 rounded">Disallow: /</code> blocks the bot from your entire site.
           </div>
+        </div>
+
+        {/* Fill Test Data */}
+        <div className="flex justify-end mb-4">
+          <button type="button" onClick={fillTestData}
+            className="px-3 py-1.5 text-xs font-mono bg-prince/20 text-prince border border-prince/30 rounded hover:bg-prince/30 transition-colors focus:outline-none focus:ring-2 focus:ring-prince focus:ring-offset-2 focus:ring-offset-abyss"
+          >Fill Test Data</button>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -138,7 +205,7 @@ function App() {
 
       {/* Footer */}
       <footer className="border-t border-metal/30 mt-16">
-        <div className="max-w-6xl mx-auto px-4 py-6">
+        <div className="max-w-[1600px] mx-auto px-4 py-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-galactic">
             <p>Free Robots.txt Generator — DreamHost Marketing Tools</p>
             <div className="flex items-center gap-4">
